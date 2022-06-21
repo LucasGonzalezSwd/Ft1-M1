@@ -167,5 +167,5 @@ function printing() {
    console.log(4);
 }
 
-printing(); // 1 , 4 , 3 , 2;
+printing(); // 1 , 4 , 3 , 2 sss
 ```
