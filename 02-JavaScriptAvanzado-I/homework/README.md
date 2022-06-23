@@ -25,14 +25,14 @@ var c = function(a, b, c) {
   console.log(b); // b = 10;
 }
 c(8,9,10);
-console.log(b); // b = 9;
+console.log(b); // b = 10;
 console.log(x); // x = 1;
 ```
 
 ```javascript
-console.log(bar); // 1;
-console.log(baz); // undefined;
-s
+console.log(bar); // undefined;
+console.log(baz); // error;
+
 var bar = 1; 
 baz = 2;
 ```
@@ -46,7 +46,7 @@ console.log(instructor); // Franco;
 ```
 
 ```javascript
-var instructor = "Tony";
+var instructor = "Tony"; 
 console.log(instructor); // Tony;
 (function() {
    if(true) {

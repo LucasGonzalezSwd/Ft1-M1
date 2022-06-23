@@ -15,10 +15,12 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
+
+     
 }
 
 function nFibonacci(n) {
-}
+}  //  0 1 1 2 3 5 8 13 21 34
 
 /*
 Implementar la clase Queue, sabiendo que es una estructura de tipo FIFO, donde el primer elemento que ingresa es el primero que se quita. Definir los siguientes métodos:
