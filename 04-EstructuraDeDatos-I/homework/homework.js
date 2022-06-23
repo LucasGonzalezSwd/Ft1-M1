@@ -15,11 +15,13 @@ Como ejercicio adicional y completamente opcional, al terminar de resolver este 
 */
 
 function nFactorial(n) {
-
-     
-}
+            if(n === 1 || n === 0) return 1;  
+            else if( n < 0) return 0; 
+            return n * nFactorial(n - 1);
+     }
 
 function nFibonacci(n) {
+   return n + nFibonacci(n + (n + 1));
 }  //  0 1 1 2 3 5 8 13 21 34
 
 /*
@@ -32,6 +34,16 @@ Pueden utilizar class o función constructora.
 */
 
 function Queue() {
+    
+       
+       /* var cola = [];
+        enqueue(n){ 
+          cola.push(n);
+        }
+        size(){
+          return cola;
+        }
+     */
 
 }
 
