@@ -1,5 +1,7 @@
 "use strict";
 
+const { listenerCount } = require("@11ty/eleventy/src/Util/AsyncEventEmitter");
+
 /*
 Implementar la clase LinkedList, definiendo los siguientes métodos:
   - add: agrega un nuevo nodo al final de la lista;
@@ -11,9 +13,64 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
 
-function LinkedList() {}
+ 
+function LinkedList() {
+       this.head = null;
+      this._length = 0;
+}
 
-function Node(value) {}
+function Node(value) {
+    this.value = value;
+    this.next = null;  
+  }
+
+
+LinkedList.prototype.add = function(data){ 
+     var node = new Node(data)
+     if(this.head === null){
+       this.head = node;
+     } else { 
+      var current = this.head;
+     while(current.next){
+      current = current.next;
+     }
+     current.next = node;
+    }  
+}
+
+LinkedList.prototype.remove = function(){ 
+     if(this.head === null) return null;
+     if(this.head.next === null){
+         var valor = this.head.value;
+         this.head = null;
+         return valor;
+     }
+     var current = this.head;
+     while(current.next.next !== null){
+      current = current.next;
+     }
+     var valor = current.next.value;
+     current.next = null;
+     return valor;
+}
+LinkedList.prototype.search = function(arg){ 
+     var current = this.head;
+     if(this.head === null) return null;
+     while(current){
+      if(typeof arg === 'function'){
+        if(arg(current.value)){
+          return current.value;
+        }
+      }
+      if(current.value === arg) return current.value;
+       
+      current = current.next;
+      
+     }
+     return null;
+   
+  }
+
 
 /*
 Implementar la clase HashTable.
@@ -30,7 +87,68 @@ La clase debe tener los siguientes métodos:
 Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
 */
 
-function HashTable() {}
+function HashTable() {
+   this.numBuckets = 35;
+   this.contedores = [];
+}
+HashTable.prototype.hash = function(value){
+   var aux = 0;
+   for(let i = 0; i < value.length; i++){
+    aux = aux + value.charCodeAt(i);
+   }
+   return aux % this.numBuckets;
+}
+HashTable.prototype.set = function(key,value){
+  if(typeof key !== 'string'){
+    throw new TypeError('Keys must be strings')
+  }
+  var pos = this.hash(key)
+  this.contedores[pos] = this.contedores[pos] || []
+  this.contedores[pos].unshift({key: key, value: value})
+}
+HashTable.prototype.get = function(key){
+          var pos = this.hash(key);
+          for(let i=0; i< this.contedores[pos].length; i++){
+            if(this.contedores[pos][i].key === key){
+              return this.contedores[pos][i].value;
+            }
+          }
+          return false;
+}
+HashTable.prototype.hasKey = function(key){
+           var hashkey = this.get(key);
+           if(hashkey) return true;
+           else return false; 
+}
+//     this.length = 0;
+//     this.items = new Array(35);
+//     for (var i = 0; i < arguments.length; i += 2) {
+//         if (typeof(arguments[i + 1]) != 'undefined') {
+//             this.items[arguments[i]] = arguments[i + 1];
+//             this.length++;
+//         }
+//     }
+//     this.get = function(in_key) {
+//         return this.items[in_key];
+//     }
+
+//     this.set = function(in_key, in_value)
+//     {
+//         if (typeof(in_value) != 'undefined') {
+//             if (typeof(this.items[in_key]) == 'undefined') {
+//                 this.length++;
+//             }
+
+//             this.items[in_key] = in_value;
+//         }
+//         return in_value;
+//       }
+//       this.hasKey = function(in_key)
+//         {
+//             return typeof(this.items[in_key]) != 'undefined';
+//         }
+//     }
+    
 
 // No modifiquen nada debajo de esta linea
 // --------------------------------
